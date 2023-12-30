@@ -11,6 +11,12 @@ services:
       - 3113:80
     links:
       - php
+    healthcheck:
+      test: curl -sS http://nginx | grep -c works > /dev/null
+      interval: 5s
+      timeout: 5s
+      retries: 2
+      start_period: 5s
 
   php:
     build:
